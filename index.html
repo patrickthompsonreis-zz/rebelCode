@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Rebel Code</title>
+
+    <!-- Custom styles for this template -->
+    <link href="css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
+
+</head>
+
+<body>
+    <!-- Form -->
+    <form class="form-signin" name="rebelForm">
+        <div class="text-center mb-4">
+            <img class="mb-4 logo" src="assets/img/rebel-logo.png" alt="" width="100" height="100">
+            <h1 class="h3 mb-3 font-weight-normal color">Seu código aqui inserir você deve. Hmmm</h1>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" id="text" class="form-control" name="rebelCode" placeholder="text" required autofocus
+                maxlength="6">
+            <label for="text">Código</label>
+        </div>
+
+        <p><a class="btn btn-lg btn-primary btn-block" href="#" id="btn-access" role="button"
+                onclick="submit()">ACESSAR</a></p>
+        <p class="mt-5 mb-3 text-muted text-center">Patrick Thompson Reis - 2019</p>
+
+    </form> <!-- End of Form -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="js/sweetalert.min.js"></script>  <!-- SweetAlert -->
+
+    <!-- JavaScript -->
+    <script>
+        // Impedindo caracteres especiais
+        document.getElementById("text").onkeypress = function (e) {
+            var chr = String.fromCharCode(e.which);
+            if ("1234567890qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".indexOf(chr) < 0)
+                return false;
+        };
+
+        // Recebendo url
+        function submit() {
+            var code = $('#text').val();
+            if(code != "" && code.length == 6){
+                $.ajax({
+                    type: 'GET',
+                    url: "https://r2d2-secret-pass.herokuapp.com/validate",
+                    success: function(res) {
+                        window.location = res;
+                    }
+                });
+            }
+            else {
+                errorAlert();
+            }
+        }
+
+        // Alerta
+        function errorAlert() {
+            swal("Tenha calma", "Insira o código, jovem Padawan", "warning");
+        }
+
+    </script>
+
+</body>
+
+</html>
