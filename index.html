@@ -67,6 +67,9 @@
             if(code != "" && code.length == 6){
                 $.ajax({
                     type: 'GET',
+                    data: {
+                        pass: code
+                    },
                     url: "https://r2d2-secret-pass.herokuapp.com/validate",
                     success: function(res) {
                         window.location = res;
